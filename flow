@@ -1,0 +1,16 @@
+1.add case in android cts
+
+    11.开发测试项目，可以使用uiautomator junit AndroidJUnitRunner 开发
+
+    12.将src 放入 cts 源码中的test/test 中，测试名称/src ，make file ，manifest
+
+    13.修改 cts/CtstestcaseList.mk ,添加新加的测试包名称到 cts_test_packages
+
+    14.添加测试plan到 tools/utils/buildCts.py
+
+    15.make cts
+
+2.jenkins 添加任务
+
+3.updated TV version
+    reboot recovery with command file in cache/recovery/command
