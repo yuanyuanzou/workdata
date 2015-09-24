@@ -7,8 +7,31 @@
     13.修改 cts/CtstestcaseList.mk ,添加新加的测试包名称到 cts_test_packages
 
     14.添加测试plan到 tools/utils/buildCts.py
+        plan = tools.TestPlan(packages)
+        plan.Include(r'android\.buildchecktest')
+        self.__WritePlan(plan, 'buildcheck')
 
     15.make cts
+    
+    16.一个plan 包含或者不包含某些cases  buildCts.py
+        # Mibox buildcheck Stable plan
+        mibox_tests = BuildBoxTestList()
+        plan = tools.TestPlan(packages)
+        for package, test_list in mibox_tests.iteritems():
+          plan.Include(package+'$')
+          packagename = 'com.mitv.buildchecktest'//不太复合cts case 结果的case
+          plan.IncludeTests(package, test_list,packagename)
+        self.__WritePlan(plan, 'boxbuildcheck')
+        
+        def BuildBoxTestList():
+      """ Construct a defaultdic that lists package names of buildcheck tests for box onloy. """
+      return {
+          'android.buildchecktest' : [
+          'BuildCheck_01_LaunchHomeAppTest#testLaunchAppStore',
+          'BuildCheck_01_LaunchHomeAppTest#testLaunchSmartHome',
+          'BuildCheck_01_LaunchHomeAppTest#testLaunchOnlineVideo',],
+          '' : []}
+
 
 2.jenkins 添加任务
 
